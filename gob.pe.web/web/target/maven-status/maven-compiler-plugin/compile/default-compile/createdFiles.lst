@@ -1,3 +1,4 @@
 onpe\gob\pe\config\AppInitializer.class
 onpe\gob\pe\config\AppConfig.class
 onpe\gob\pe\controller\loginController.class
+onpe\gob\pe\model\UsuarioModel.class
