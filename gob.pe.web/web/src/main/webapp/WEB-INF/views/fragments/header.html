@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>        
+    </head>
+    <body>
+        <header th:fragment="header">
+            <v-toolbar>
+                <v-toolbar-title>Cobros</v-toolbar-title>
+                <v-spacer></v-spacer>                
+                <v-toolbar-title class="hidden-sm-and-down">Usuario Usuario, Usuario</v-toolbar-title>
+                <v-tooltip bottom>
+                    <v-btn icon slot="activator">
+                        <v-icon>person</v-icon>
+                    </v-btn>
+                    <span>Usuario Usuario, Usuario</span>
+                </v-tooltip>
+                
+            </v-toolbar>
+        </header>       
+    </body>
+</html>

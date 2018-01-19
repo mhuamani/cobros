@@ -8,8 +8,10 @@ package onpe.gob.pe.controller;
 
 import com.google.gson.Gson;
 import java.util.HashMap;
+import static onpe.gob.pe.controller.PrincipalController.logger;
 
 import onpe.gob.pe.model.UsuarioModel;
+import static onpe.gob.pe.transversal.Constantes.MSG_LOG_INFO_CARGA;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -27,12 +29,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/")
-public class loginController {
-    final static Logger logger = LoggerFactory.getLogger(loginController.class);
+public class LoginController {
+    final static Logger logger = LoggerFactory.getLogger(LoginController.class);
     @GetMapping("")
-    public String index(Model model){     
-        logger.info("INFO: Login iniciado.");
-        //logger.info("Vista Login");
+    public String index(Model model){                     
+        logger.info(String.format(MSG_LOG_INFO_CARGA, "Login"));
         model.addAttribute("name", "Hola Mundo cruel");
         
         return "login";

@@ -1,4 +1,6 @@
 onpe\gob\pe\config\AppInitializer.class
 onpe\gob\pe\config\AppConfig.class
-onpe\gob\pe\controller\loginController.class
+onpe\gob\pe\controller\PrincipalController.class
 onpe\gob\pe\model\UsuarioModel.class
+onpe\gob\pe\transversal\Constantes.class
+onpe\gob\pe\controller\LoginController.class
