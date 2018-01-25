@@ -7,7 +7,7 @@ var Global = Vue.extend({
                 nombre:'Hola amigos como estan'
             },
             loading:false,
-            urlBase:'http://localhost:8080/web/'
+            urlBase:'http://localhost:8080/cobros/'
         }    
     }
 });

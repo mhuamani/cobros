@@ -1,10 +1,12 @@
 package onpe.gob.pe.config;
 
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Description;
+import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -19,41 +21,27 @@ import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author MHuamani
  */
-//@Configuration
-//@EnableWebMvc
-//@ComponentScan(basePackages = "onpe.gob.pe")
-//public class AppConfig extends WebMvcConfigurerAdapter{
-//
-//    @Bean
-//    public ViewResolver viewResolver() {
-//            InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
-//            viewResolver.setViewClass(JstlView.class);
-//            viewResolver.setPrefix("/WEB-INF/views/");
-//            viewResolver.setSuffix(".html");
-//
-//            return viewResolver;
-//    }
-//
-//    @Override
-//    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
-//            configurer.enable();
-//    }
-//}
-
 @Configuration
 @EnableWebMvc
-@ComponentScan("onpe.gob.pe")
-public class AppConfig extends WebMvcConfigurerAdapter{
+//@ComponentScan({"onpe.gob.pe.controller","onpe.gob.pe.iservicios","onpe.gob.pe.servicios"})
+@Import(ApplicationContext.class)
+@ComponentScan({"onpe.gob.pe.config","onpe.gob.pe.controller","onpe.gob.pe.iservice","onpe.gob.pe.service","onpe.gob.pe.dao"})
+@PropertySource({"classpath:Application.properties"})
+public class AppConfig extends WebMvcConfigurerAdapter {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         super.addResourceHandlers(registry);
-        registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");     
+        registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+    }
+    
+    @Bean
+    public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer(){
+        return new PropertySourcesPlaceholderConfigurer();
     }
     
     @Bean
@@ -77,6 +65,7 @@ public class AppConfig extends WebMvcConfigurerAdapter{
         templateEngine.setTemplateEngineMessageSource(messageSource());
         return templateEngine;
     }
+
     @Bean
     @Description("Thymeleaf View Resolver")
     public ThymeleafViewResolver viewResolver() {
@@ -86,6 +75,7 @@ public class AppConfig extends WebMvcConfigurerAdapter{
         viewResolver.setCache(false);
         return viewResolver;
     }
+
     @Bean
     @Description("Spring Message Resolver")
     public ResourceBundleMessageSource messageSource() {
