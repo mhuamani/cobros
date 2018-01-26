@@ -1,4 +1,4 @@
-Vue.options.delimiters = ['{', '}'];
+Vue.options.delimiters = ['[[', ']]'];
 var Global = Vue.extend({
     data:function(){
         return {

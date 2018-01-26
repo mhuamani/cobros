@@ -5,23 +5,28 @@
  */
 package onpe.gob.pe.transversal;
 
+import org.hsqldb.error.ErrorCode;
+
+
+
 /**
  *
  * @author MHuamani
  */
-public class CustomException extends Exception{
+public class CustomException extends RuntimeException {
+
     private boolean internalMessage;
     private Object[] parameters;
-    
-    public CustomException(String message,Object... parameters){     
-        super(message);
-        this.parameters=parameters;
-    }
+     
     
     public CustomException(String message){
         super(message);
     }
-
+    public CustomException(String message,Object... parameters){     
+        super(message);
+        this.parameters=parameters;
+    }
+   
     public boolean isInternalMessage() {
         return internalMessage;
     }

@@ -8,6 +8,8 @@ package onpe.gob.pe.controller;
 
 import com.google.gson.Gson;
 import java.util.HashMap;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import onpe.gob.pe.entidades.Usuario;
 
 import static onpe.gob.pe.transversal.Constantes.MSG_LOG_INFO_CARGA;
@@ -23,6 +25,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import onpe.gob.pe.iservice.IUsuarioService;
+import onpe.gob.pe.transversal.CustomException;
+import onpe.gob.pe.transversal.Util;
 
 
 /**
@@ -39,31 +43,39 @@ public class LoginController {
     private IUsuarioService usuarioService;
     
     @GetMapping("login")
-    public String index(Model model){                     
-        logger.info(String.format(MSG_LOG_INFO_CARGA, "Login"));
+    public String login(Model model){                     
+        logger.info(String.format(MSG_LOG_INFO_CARGA,LoginController.class.getName(), "Login"));
         model.addAttribute("name", "Hola Mundo cruel");
         
         return "login";
     }
     
-    @PostMapping("ingresarSistema")
+    @PostMapping("ajaxIngresarSistema")
     @ResponseBody     
-    public String accederSistema(@RequestBody Usuario usuario){        
-        logger.info(String.format(MSG_LOG_INFO_EJECUCION, "accederSistema"));  
+    public String ajaxIngresarSistema(HttpServletRequest request,@RequestBody Usuario usuario){        
+        logger.info(String.format(MSG_LOG_INFO_EJECUCION,LoginController.class.getName(), "accederSistema"));  
         boolean success = true;
-        String mensaje = "correcto";
+        String mensaje = "";
+        boolean errorNegocio = false;
         HashMap map = new HashMap();
-        
+        HttpSession session = request.getSession(true);        
         try {
-            usuario = usuarioService.accederSistema(usuario.getUsuario(),usuario.getClave());            
+            usuario = usuarioService.accederSistema(usuario);     
+            session.setAttribute("usuario", usuario);
+        } catch (CustomException ce) {
+            mensaje = ce.getMessage();
+            success = false;
+            errorNegocio = true;
         } catch (Exception e) {
             mensaje = e.getMessage();
             success = false;
+            errorNegocio = false;
         }
                 
         map.put("usuario", usuario);
         map.put("success", success);
         map.put("message", mensaje);
+        map.put("errorNegocio", errorNegocio);
         return new Gson().toJson(map);
     }
 }

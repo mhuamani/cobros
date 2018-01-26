@@ -6,6 +6,7 @@
 package onpe.gob.pe.dao;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import onpe.gob.pe.entidades.Usuario;
@@ -24,8 +25,14 @@ public class UsuarioDAOImpl implements UsuarioDAO{
     @Override
     public Usuario accederSistema(String usuario, String clave) {
         String sql = "select u from Usuario u where u.usuario = :usuario and u.clave = :clave";
-        TypedQuery<Usuario> hql = entityManager.createQuery(sql,Usuario.class);
-        return hql.setParameter("usuario", usuario).setParameter("clave", clave).getSingleResult();        
+        Usuario res = null;
+        try {
+            TypedQuery<Usuario> hql = entityManager.createQuery(sql,Usuario.class);        
+            res = hql.setParameter("usuario", usuario).setParameter("clave", clave).getSingleResult();
+            return res;   
+        } catch (NoResultException e) {
+            return res;
+        }
     }
     
 }

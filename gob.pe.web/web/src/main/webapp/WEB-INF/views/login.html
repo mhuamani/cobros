@@ -13,7 +13,7 @@
             <v-app>
                 <v-layout align-center justify-center>
                     <v-flex xs12 sm6 md2 lg3>
-                        <v-form v-model="valid">
+                        <v-form ref="form" name="form" v-model="valid">
                             <v-card>
                                 <v-card-title>                                
                                     <v-layout column>
@@ -53,10 +53,13 @@
                                 <v-card-actions>
                                     <v-layout row>
                                         <v-flex sm12 xs12 md12 class="text-xs-center text-md-center">
-                                            <v-btn block color="secondary" v-on:click="accederSistema" >Ingresar</v-btn>
+                                            <v-btn block color="secondary" v-on:click="accederSistema" v-bind:disabled='!isComplete'>Ingresar</v-btn>
                                         </v-flex>
-                                    </v-layout>
-                                </v-card-actions>
+                                    </v-layout>                                    
+                                </v-card-actions>                                      
+                                <v-alert outline color="error" icon="warning" v-bind:value="basico.error">
+                                    [[basico.mensajeError]]
+                                </v-alert>
                             </v-card>
                         </v-form>
                     </v-flex>                   

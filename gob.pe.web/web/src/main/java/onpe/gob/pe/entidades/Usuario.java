@@ -22,17 +22,48 @@ import javax.validation.constraints.Size;
 @Table(name = "tab_usuario")
 public class Usuario implements Serializable {
 
-    @Size(max = 1)
-    @Column(name = "C_ESTADO")
-    private String cEstado;
+    private static final long serialVersionUID = 1L;  
 
-    private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
     @Column(name = "N_ID_USUARIO")
     private Long idUsuario;
+     
+    @Size(max = 1)
+    @Column(name = "C_ESTADO")
+    private String estado;
+    
+    @Size(max = 255)
+    @Column(name = "C_APELLIDO_MATERNO")
+    private String apellidoMaterno;
+    
+    @Size(max = 255)
+    @Column(name = "C_APELLIDO_PATERNO")
+    private String apellidoPaterno;
+    
+    @Size(max = 10)
+    @Column(name = "C_CLAVE")
+    private String clave;
+    
+    @Size(max = 255)
+    @Column(name = "C_NOMBRE")
+    private String nombre;
+    
+    @Size(max = 10)
+    @Column(name = "C_USUARIO")
+    private String usuario;
 
+    public Usuario() {
+    }    
+
+    public String getCEstado() {
+        return estado;
+    }
+
+    public void setCEstado(String estado) {
+        this.estado = estado;
+    }
     public Long getIdUsuario() {
         return idUsuario;
     }
@@ -80,31 +111,4 @@ public class Usuario implements Serializable {
     public void setUsuario(String usuario) {
         this.usuario = usuario;
     }
-    @Size(max = 255)
-    @Column(name = "C_APELLIDO_MATERNO")
-    private String apellidoMaterno;
-    @Size(max = 255)
-    @Column(name = "C_APELLIDO_PATERNO")
-    private String apellidoPaterno;
-    @Size(max = 10)
-    @Column(name = "C_CLAVE")
-    private String clave;
-    @Size(max = 255)
-    @Column(name = "C_NOMBRE")
-    private String nombre;
-    @Size(max = 10)
-    @Column(name = "C_USUARIO")
-    private String usuario;
-
-    public Usuario() {
-    }    
-
-    public String getCEstado() {
-        return cEstado;
-    }
-
-    public void setCEstado(String cEstado) {
-        this.cEstado = cEstado;
-    }
-    
 }

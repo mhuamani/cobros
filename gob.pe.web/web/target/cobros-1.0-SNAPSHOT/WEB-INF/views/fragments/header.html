@@ -12,11 +12,13 @@ and open the template in the editor.
             <v-toolbar>
                 <v-toolbar-title>Cobros</v-toolbar-title>
                 <v-spacer></v-spacer>                
-                <v-toolbar-title class="hidden-sm-and-down">Usuario Usuario, Usuario</v-toolbar-title>
+                <v-toolbar-title class="hidden-sm-and-down">                    
+                    <span th:text="${session.usuario.apellidoPaterno + ' ' + session.usuario.apellidoMaterno + ', ' + session.usuario.nombre}"></span>                  
+                </v-toolbar-title>
                 <v-tooltip bottom>
                     <v-btn icon slot="activator">
                         <v-icon>person</v-icon>
-                    </v-btn>
+                    </v-btn>                    
                     <span>Usuario Usuario, Usuario</span>
                 </v-tooltip>
                 

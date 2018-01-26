@@ -12,5 +12,5 @@ import onpe.gob.pe.entidades.Usuario;
  * @author MHuamani
  */
 public interface IUsuarioService {
-    Usuario accederSistema(String usuario,String clave);
+    Usuario accederSistema(Usuario usuario);
 }

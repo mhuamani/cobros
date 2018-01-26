@@ -6,6 +6,7 @@
 package onpe.gob.pe.controller;
 
 
+import javax.servlet.http.HttpSession;
 import static onpe.gob.pe.transversal.Constantes.MSG_LOG_INFO_CARGA;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,8 +23,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class PrincipalController {
     final static Logger logger = LoggerFactory.getLogger(PrincipalController.class);
     @GetMapping("/")
-    public String index(){        
-        logger.info(String.format(MSG_LOG_INFO_CARGA, "Principal"));
+    public String index(){                
+        logger.info(String.format(MSG_LOG_INFO_CARGA,PrincipalController.class.getName(), "Principal"));        
+        //Usuario name = (String) session.getAttribute("name");
         return "principal";
     }
 }

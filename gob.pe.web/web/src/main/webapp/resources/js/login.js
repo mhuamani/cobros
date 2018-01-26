@@ -1,8 +1,12 @@
 var login = new Global({
-   el:'#appLogin',   
-   data(){
-        return {
+   el:'#appLogin',        
+   data:function(){
+        return{
             valid: false,
+            basico: {
+                error: false,
+                mensajeError: ''
+            },
             usuarioRules: [
                 (v) => !!v || 'El usuario es requerido.',
                 (v) => v && v.length <= 10 || 'El usuario debe tener menos de 10 caracteres.'
@@ -11,23 +15,40 @@ var login = new Global({
                 (v) => !!v || 'La clave es requerida.',
                 (v) => v && v.length <= 10 || 'La clave debe tener menos de 10 caracteres.'
             ]
-        };
+        }
    },
+    computed: {
+        isComplete() {
+            return this.usuario.usuario && this.usuario.clave;
+        }
+    },
    methods:{
        accederSistema: function(){
-           this.loading = true;     
-           console.log(this.usuario);
-           axios({
-                    url:this.urlBase + 'ingresarSistema',
+           let self = this; 
+           if (self.$refs.form.validate()){
+               axios({
+                    url:this.urlBase + 'ajaxIngresarSistema',
                     method:'post',
                     data:this.usuario
                 })
-                .then(function(response){
-                    console.log(response.data);
+                .then(function(response){                    
+                    if (response.data.success) {
+                        location.href=self.urlBase + 'principal/';
+                    }else{                        
+                        if (response.data.errorNegocio) {
+                            self.basico.error = true;
+                            self.basico.mensajeError = response.data.message;
+                            
+                        }else{
+                            console.log(response.data.message);
+                        }                       
+                    }
                 })
-                .catch(function(error){
-                    console.log(error.data);
+                .catch(function(error){                    
+                    console.log(error);
                 });
+           }
        }
+      
    }
 });

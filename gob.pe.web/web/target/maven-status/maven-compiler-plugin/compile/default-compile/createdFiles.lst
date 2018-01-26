@@ -6,9 +6,9 @@ onpe\gob\pe\dao\UsuarioDAOImpl.class
 onpe\gob\pe\controller\PrincipalController.class
 onpe\gob\pe\transversal\Constantes.class
 onpe\gob\pe\controller\LoginController.class
-onpe\gob\pe\entidades\Usuario_.class
 onpe\gob\pe\entidades\Usuario.class
 onpe\gob\pe\config\AppInitializer.class
 onpe\gob\pe\iservice\IUsuarioService.class
 onpe\gob\pe\transversal\CustomException.class
 onpe\gob\pe\transversal\ReglasNegocio.class
+onpe\gob\pe\transversal\Util.class
